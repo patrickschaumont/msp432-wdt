@@ -25,6 +25,8 @@ void Toggle_Booster_LED(){
     GPIO_toggleOutputOnPin(GPIO_PORT_P2, GPIO_PIN6);
 }
 
+#define WATCHDOG_A RESET_SRC_1
+
 int main(void) {
   volatile int ii;
 
@@ -35,7 +37,7 @@ int main(void) {
    * we want to toggle a GPIO quickly to illustrate
    * that the watchdog timed out.
    */
-  if (ResetCtl_getSoftResetSource() & RESET_SRC_1) {
+  if (ResetCtl_getSoftResetSource() & WATCHDOG_A) {
       InitLED();
       while(1) {
           Toggle_Booster_LED();
